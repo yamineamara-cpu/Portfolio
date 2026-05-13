@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Yamine Amara — Portfolio BTS SIO</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── CV document ── */
+    .cv-doc {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 3rem 2rem 5rem;
+    }
+    .cv-section {
+      margin-bottom: 2.6rem;
+    }
+    .cv-section-header {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--primary);
+      margin-bottom: 1.4rem;
+    }
+    /* Profil */
+    .profil-text {
+      font-size: 0.95rem;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    /* Sections inline (compétences, qualités…) */
+    .inline-section {
+      margin-bottom: 1.8rem;
+    }
+    .inline-section h3 {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 0.7rem;
+    }
+    /* Lang table */
+    .lang-table {
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    .lang-table td {
+      padding: 0.45rem 0;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+    .lang-table td:last-child {
+      padding-left: 1.5rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .lang-table tr:last-child td { border-bottom: none; }
+    /* Interest list */
+    .interest-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .interest-tag {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 0.3rem 0.9rem;
+      font-size: 0.85rem;
+      color: var(--text);
+      transition: background 0.3s;
+    }
+    /* Certifications */
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.2rem;
+    }
+    .cert-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.2rem 1.4rem;
+      box-shadow: var(--shadow);
+      text-decoration: none;
+      color: inherit;
+      transition: box-shadow 0.2s, transform 0.2s;
+      display: block;
+    }
+    .cert-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+    .cert-card h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+    .cert-card p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .cert-icon { font-size: 1.6rem; margin-bottom: 0.5rem; }
+    .cert-screenshot-placeholder {
+      display: inline-block;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--primary);
+      text-decoration: none;
+      margin: 3px 2px;
+      transition: background 0.2s;
+    }
+    .cert-screenshot-placeholder:hover { background: var(--border); }
+    /* Hero centered */
+    .hero-inner-center {
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1rem;
+    }
+    .hero-contacts-center {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVBAR ── -->
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a href="index.html" class="navbar-brand">Yamine <span>Amara</span></a>
+    <ul class="navbar-nav">
+      <li><a href="index.html" class="active">Accueil / CV</a></li>
+      <li><a href="realisations.html">Réalisations professionnelles</a></li>
+      <li><a href="veille.html">Veille technologique</a></li>
+      <li><a href="rectorat.html">Rectorat</a></li>
+    </ul>
+
+    <button class="nav-burger" id="nav-burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-inner-center">
+    <div class="hero-avatar" style="width:130px;height:130px;">
+      <img src="photo.jpeg" alt="Yamine Amara">
+    </div>
+    <div>
+      <h1 style="font-family:'Poppins',sans-serif;font-size:clamp(1.8rem,5vw,2.8rem);font-weight:800;color:var(--hero-text);line-height:1.1;margin-bottom:0.3rem;">
+        Yamine <span style="color:var(--primary);">Amara</span>
+      </h1>
+      <p style="font-size:1.05rem;color:var(--hero-sub);margin-bottom:1rem;">Étudiant BTS SIO – Option SLAM</p>
+      <button onclick="window.print()" class="btn btn-primary" style="margin-bottom:1rem;">📄 Télécharger mon CV</button>
+      <div class="hero-contacts-center">
+        <a href="tel:0664411279" class="hero-contact-item">📞 06 64 41 12 79</a>
+        <a href="mailto:yamineamara@icloud.com" class="hero-contact-item">✉️ yamineamara@icloud.com</a>
+        <span class="hero-contact-item">📍 37 Allée d'Aliènor d'Aquitaine, 76140 Le Petit-Quevilly</span>
+        <span class="hero-contact-item">🚗 Permis B – Véhicule personnel</span>
+        <span class="hero-contact-item">🎂 01/10/2006</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CV DOCUMENT ── -->
+<div class="cv-doc">
+
+  <!-- Profil -->
+  <div class="cv-section">
+    <h2 class="cv-section-header">🙋 Profil</h2>
+    <p class="profil-text">
+      Enchanté, je suis <strong>Yamine Amara</strong> ! Actuellement étudiant en BTS SIO,
+      mon avenir est une priorité. Ambitieux et motivé, je suis prêt à donner le meilleur de moi-même.
+    </p>
+  </div>
+
+  <!-- Expériences -->
+  <div class="cv-section">
+    <h2 class="cv-section-header">💼 Expériences professionnelles</h2>
+    <ul class="timeline">
+
+      <li class="timeline-item">
+        <div class="timeline-date">Juin – Août 2023</div>
+        <div class="timeline-title">Stagiaire</div>
+        <div class="timeline-company">📍 RS Informatique — Rouen</div>
+        <p class="timeline-desc">Développement de sites e-commerce. Montage informatique. Conception d'ordinateurs PC Gamer.</p>
+        <div class="timeline-tags">
+          <span class="tag">E-commerce</span>
+          <span class="tag">Montage PC</span>
+          <span class="tag">PC Gamer</span>
+        </div>
+      </li>
+
+      <li class="timeline-item">
+        <div class="timeline-date">Septembre 2023</div>
+        <div class="timeline-title">Stagiaire</div>
+        <div class="timeline-company">📍 ABS Auto — Rouen</div>
+        <p class="timeline-desc">Référencement de pièces détachées automobiles dans le système d'information de l'entreprise.</p>
+        <div class="timeline-tags">
+          <span class="tag">Référencement</span>
+          <span class="tag">Base de données</span>
+        </div>
+      </li>
+
+      <li class="timeline-item">
+        <div class="timeline-date">2019 – Mai 2025 (week-ends &amp; vacances)</div>
+        <div class="timeline-title">Stagiaire polyvalent</div>
+        <div class="timeline-company">📍 Magren Auto — Rouen</div>
+        <p class="timeline-desc">
+          Préparation des commandes, réception et manutention. Aménagement du point de vente et mise en rayon.
+          Service client direct et téléphonique. Accueil et prise en charge des clients.
+          Clôture des caisses en autonomie. Mécanique.
+        </p>
+        <div class="timeline-tags">
+          <span class="tag">Service client</span>
+          <span class="tag">Logistique</span>
+          <span class="tag">Mécanique</span>
+          <span class="tag">Autonomie</span>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+
+  <!-- Formation -->
+  <div class="cv-section">
+    <h2 class="cv-section-header">🎓 Diplômes &amp; Formation</h2>
+    <ul class="timeline">
+
+      <li class="timeline-item">
+        <div class="timeline-date">Septembre 2025 – Actuellement</div>
+        <div class="timeline-title">BTS SIO — Option SLAM</div>
+        <div class="timeline-company">📍 Campus La Châtaigneraie — Le Mesnil-Esnard</div>
+        <p class="timeline-desc">Services Informatiques aux Organisations, spécialité Solutions Logicielles et Applications Métiers.</p>
+      </li>
+
+      <li class="timeline-item">
+        <div class="timeline-date">Septembre 2021 – Juillet 2025</div>
+        <div class="timeline-title">Baccalauréat</div>
+        <div class="timeline-company">📍 Lycée Blaise Pascal — Rouen</div>
+        <p class="timeline-desc">Obtention du baccalauréat général.</p>
+      </li>
+
+    </ul>
+  </div>
+
+  <!-- Compétences techniques -->
+  <div class="cv-section">
+    <h2 class="cv-section-header">💻 Compétences techniques</h2>
+    <div class="skill-list">
+      <span class="skill-tag">Création &amp; maintenance de serveur</span>
+      <span class="skill-tag">Assemblage &amp; configuration de PC</span>
+      <span class="skill-tag">Conception PC Gamer</span>
+      <span class="skill-tag">Montage informatique</span>
+      <span class="skill-tag">Maîtrise du Pack Office</span>
+      <span class="skill-tag">Organisation espace de travail</span>
+    </div>
+  </div>
+
+  <!-- Langages & Outils -->
+  <div class="cv-section">
+    <h2 class="cv-section-header">🖥️ Langages &amp; Outils</h2>
+    <div class="inline-section">
+      <h3>Langages</h3>
+      <div class="skill-list">
+        <span class="skill-tag">HTML</span>
+        <span class="skill-tag">CSS</span>
+        <span class="skill-tag">PHP</span>
+        <span class="skill-tag">C#</span>
+        <span class="skill-tag">SQL</span>
+      </div>
+    </div>
+    <div class="inline-section">
+      <h3>Outils</h3>
+      <div class="skill-list">
+        <span class="skill-tag">MySQL</span>
+        <span class="skill-tag">Visual Studio</span>
+        <span class="skill-tag">VS Code</span>
+        <span class="skill-tag">VirtualBox</span>
+        <span class="skill-tag">VMware</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Qualités -->
+  <div class="cv-section">
+    <h2 class="cv-section-header">🧠 Qualités</h2>
+    <div class="skill-list">
+      <span class="soft-skill-tag">✦ Innovant &amp; créatif</span>
+      <span class="soft-skill-tag">✦ Ponctuel</span>
+      <span class="soft-skill-tag">✦ Autonome</span>
+    </div>
+  </div>
+
+  <!-- Langues -->
+  <div class="cv-section">
+    <h2 class="cv-section-header">🌍 Langues</h2>
+    <table class="lang-table">
+      <tr>
+        <td>Français</td>
+        <td>Natif</td>
+      </tr>
+      <tr>
+        <td>Anglais</td>
+        <td>B2</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Centres d'intérêt -->
+  <div class="cv-section">
+    <h2 class="cv-section-header">❤️ Centres d'intérêt</h2>
+    <div class="interest-list">
+      <span class="interest-tag">💻 Informatique</span>
+      <span class="interest-tag">🚗 Automobile</span>
+      <span class="interest-tag">✈️ Voyages</span>
+      <span class="interest-tag">👗 Mode</span>
+    </div>
+  </div>
+
+  <!-- Certifications -->
+  <div class="cv-section">
+    <h2 class="cv-section-header">🏅 Certifications</h2>
+    <div class="cert-grid">
+
+      <div class="cert-card" style="cursor:default;">
+        <div class="cert-icon">🔒</div>
+        <h3>RGPD — CNIL</h3>
+        <p>Règlement Général sur la Protection des Données — 5 modules complétés.</p>
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:0.9rem;">
+          <a href="docs/rgpd-screen1.pdf" target="_blank" rel="noopener" title="Module 1" style="display:block;border-radius:6px;overflow:hidden;border:2px solid transparent;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='transparent'">
+            <img src="docs/rgpd-thumb1-1.jpg" alt="Module 1" style="width:100%;height:70px;object-fit:cover;display:block;">
+            <div style="text-align:center;font-size:0.65rem;font-weight:700;color:var(--muted);padding:3px 0;">1</div>
+          </a>
+          <a href="docs/rgpd-screen2.pdf" target="_blank" rel="noopener" title="Module 2" style="display:block;border-radius:6px;overflow:hidden;border:2px solid transparent;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='transparent'">
+            <img src="docs/rgpd-thumb2-1.jpg" alt="Module 2" style="width:100%;height:70px;object-fit:cover;display:block;">
+            <div style="text-align:center;font-size:0.65rem;font-weight:700;color:var(--muted);padding:3px 0;">2</div>
+          </a>
+          <a href="docs/rgpd-screen3.pdf" target="_blank" rel="noopener" title="Module 3" style="display:block;border-radius:6px;overflow:hidden;border:2px solid transparent;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='transparent'">
+            <img src="docs/rgpd-thumb3-1.jpg" alt="Module 3" style="width:100%;height:70px;object-fit:cover;display:block;">
+            <div style="text-align:center;font-size:0.65rem;font-weight:700;color:var(--muted);padding:3px 0;">3</div>
+          </a>
+          <a href="docs/rgpd-screen4.pdf" target="_blank" rel="noopener" title="Module 4" style="display:block;border-radius:6px;overflow:hidden;border:2px solid transparent;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='transparent'">
+            <img src="docs/rgpd-thumb4-1.jpg" alt="Module 4" style="width:100%;height:70px;object-fit:cover;display:block;">
+            <div style="text-align:center;font-size:0.65rem;font-weight:700;color:var(--muted);padding:3px 0;">4</div>
+          </a>
+          <a href="docs/rgpd-screen5.pdf" target="_blank" rel="noopener" title="Module 5" style="display:block;border-radius:6px;overflow:hidden;border:2px solid transparent;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='transparent'">
+            <img src="docs/rgpd-thumb5-1.jpg" alt="Module 5" style="width:100%;height:70px;object-fit:cover;display:block;">
+            <div style="text-align:center;font-size:0.65rem;font-weight:700;color:var(--muted);padding:3px 0;">5</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="cert-card" style="cursor:default;opacity:0.6;">
+        <div class="cert-icon">🛡️</div>
+        <h3>ANSSI</h3>
+        <p>Agence Nationale de la Sécurité des Systèmes d'Information — certification en cours.</p>
+        <p style="margin-top:0.6rem;font-size:0.75rem;color:var(--muted);font-style:italic;">Document à fournir</p>
+      </div>
+
+      <div class="cert-card" style="cursor:default;opacity:0.6;">
+        <div class="cert-icon">🎯</div>
+        <h3>Certification PIX</h3>
+        <p>Certification des compétences numériques — évaluation sur 5 domaines clés du numérique.</p>
+        <p style="margin-top:0.6rem;font-size:0.75rem;color:var(--muted);font-style:italic;">Document à fournir</p>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p>© 2026 Yamine Amara — Portfolio BTS SIO SLAM &nbsp;|&nbsp; <a href="mailto:yamineamara@icloud.com">yamineamara@icloud.com</a></p>
+</footer>
+
+<button id="theme-toggle" aria-label="Changer de thème">🌙</button>
+<script src="theme.js"></script>
+</body>
+</html>

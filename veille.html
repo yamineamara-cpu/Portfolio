@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Veille technologique — Yamine Amara</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── Axe cards ── */
+    .axe-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .axe-card {
+      border-left: 4px solid var(--primary);
+      padding: 1.4rem 1.6rem;
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .axe-card.axe-2 {
+      border-left-color: var(--accent);
+    }
+    .axe-num {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--primary);
+      margin-bottom: 0.4rem;
+    }
+    .axe-card.axe-2 .axe-num { color: var(--accent); }
+    .axe-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.6rem;
+    }
+    .axe-desc {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    /* ── Keywords ── */
+    .kw-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.8rem;
+    }
+    .kw {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 3px 12px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    /* ── News cards redesign ── */
+    .news-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .news-item {
+      display: flex;
+      gap: 1.5rem;
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .news-item:hover {
+      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+      transform: translateY(-2px);
+    }
+    .news-axe-stripe {
+      width: 6px;
+      flex-shrink: 0;
+      background: var(--primary);
+    }
+    .news-axe-stripe.axe-2 { background: var(--accent); }
+    .news-body {
+      padding: 1.2rem 1.4rem 1.2rem 0;
+      flex: 1;
+    }
+    .news-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.6rem;
+    }
+    .news-axe-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      background: var(--primary);
+      color: #fff;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+    .news-axe-tag.axe-2 { background: var(--accent); }
+    .news-date-txt {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .news-src {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .news-item-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+    }
+    .news-summary {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 0.8rem;
+    }
+    .news-link-label {
+      font-size: 0.78rem;
+      color: var(--primary);
+      font-weight: 600;
+    }
+    /* ── Methodology steps ── */
+    .method-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .method-step {
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 1.2rem;
+      text-align: center;
+    }
+    .method-step-icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+    .method-step h4 {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+    .method-step p {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .tool-date {
+      margin-top: 0.6rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    /* ── Application block ── */
+    .appli-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      padding: 1.6rem;
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+    .appli-icon {
+      font-size: 2.5rem;
+      flex-shrink: 0;
+    }
+    .appli-body h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+    .appli-body p {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .tech-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.8rem;
+    }
+    .tech-chip {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 3px 10px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a href="index.html" class="navbar-brand">Yamine <span>Amara</span></a>
+    <ul class="navbar-nav">
+      <li><a href="index.html">Accueil / CV</a></li>
+      <li><a href="realisations.html">Réalisations professionnelles</a></li>
+      <li><a href="veille.html" class="active">Veille technologique</a></li>
+      <li><a href="rectorat.html">Rectorat</a></li>
+    </ul>
+
+    <button class="nav-burger" id="nav-burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="page-wrap">
+<div class="container">
+
+  <!-- En-tête -->
+  <div class="animate" style="margin-bottom:2rem;">
+    <p class="eyebrow" style="margin-bottom:10px;">Épreuve E4 · BTS SIO SLAM · Session 2026</p>
+    <h1 style="font-family:'Poppins',sans-serif;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;color:var(--text);line-height:1.15;">
+      De la ligne de code<br><em style="font-style:italic;font-weight:400;color:var(--primary);">au Datacenter</em>
+    </h1>
+    <p style="font-size:0.95rem;color:var(--muted);margin-top:12px;max-width:640px;line-height:1.65;">
+      L'hébergement et la gestion des données pour le développeur moderne — une veille structurée autour de deux axes stratégiques.
+    </p>
+  </div>
+
+  <!-- Présentation du thème -->
+  <div class="animate delay-1" style="margin-bottom:2.5rem;">
+    <h2 class="section-title">🎯 Thème &amp; bornage</h2>
+    <div class="section-divider"></div>
+    <p style="font-size:0.9rem;color:var(--muted);line-height:1.75;max-width:760px;margin:1rem 0 1.5rem;">
+      Ce thème explore les technologies de stockage et d'hébergement. Il ne s'agit pas d'étudier le matériel seul, mais d'analyser
+      comment le choix de l'infrastructure en Datacenter devient indispensable pour le développeur — pont critique entre la création
+      locale du code, sa mise en ligne globale, et la sauvegarde vitale des bases de données.
+    </p>
+
+    <div class="axe-grid">
+      <div class="axe-card">
+        <div class="axe-num">Axe 1</div>
+        <div class="axe-title">🖥️ Hébergement &amp; Déploiement applicatif</div>
+        <p class="axe-desc">
+          Suivi des outils et méthodes (FTP sécurisé, SSH, serveurs Web) permettant la mise en ligne, la configuration et la mise à jour
+          des applications métiers. Comprendre comment une application passe d'un environnement local à un serveur de production réel.
+        </p>
+      </div>
+      <div class="axe-card axe-2">
+        <div class="axe-num">Axe 2</div>
+        <div class="axe-title">🗄️ Sauvegarde &amp; Intégrité des données</div>
+        <p class="axe-desc">
+          Veille sur les solutions de stockage capables de répliquer les bases de données et d'automatiser les sauvegardes pour éviter
+          toute perte d'exploitation. Analyse de la résilience face aux cybermenaces et du stockage immuable.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Outils -->
+  <div class="animate delay-1" style="margin-bottom:2.5rem;">
+    <h2 class="section-title">🛠️ Outils de veille</h2>
+    <div class="section-divider"></div>
+    <p style="font-size:0.85rem;color:var(--muted);margin:0.5rem 0 1.2rem;">Applications et services utilisés pour collecter et organiser l'information — minimum 1 nouvel outil testé par mois.</p>
+
+    <div class="method-steps">
+
+      <a href="https://feedly.com" target="_blank" rel="noopener" class="method-step" style="text-decoration:none;cursor:pointer;">
+        <div class="method-step-icon">📰</div>
+        <h4>Feedly</h4>
+        <p>Agrégateur de flux RSS permettant de centraliser et lire les articles de plusieurs sources en un seul endroit.</p>
+        <div class="tool-date">Depuis mars 2026</div>
+      </a>
+
+      <a href="https://www.google.com/alerts" target="_blank" rel="noopener" class="method-step" style="text-decoration:none;cursor:pointer;">
+        <div class="method-step-icon">🔔</div>
+        <h4>Google Alerts</h4>
+        <p>Service d'alertes par e-mail dès qu'un nouveau contenu correspondant aux mots-clés est indexé par Google.</p>
+        <div class="tool-date">Depuis avril 2026</div>
+      </a>
+
+      <div class="method-step" style="border:1px solid var(--primary);position:relative;">
+        <div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--primary);color:#fff;font-size:0.65rem;font-weight:700;padding:2px 8px;border-radius:10px;white-space:nowrap;text-transform:uppercase;letter-spacing:0.06em;">Nouvel outil · Mai 2026</div>
+        <div class="method-step-icon">🤖</div>
+        <h4>Assistant IA (Claude)</h4>
+        <p>Recherche et analyse d'actualités via intelligence artificielle — identification rapide des articles pertinents par axe de bornage.</p>
+        <div class="tool-date" style="color:var(--primary);">Ajouté mai 2026</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Sources -->
+  <div class="animate delay-1" style="margin-bottom:2.5rem;">
+    <h2 class="section-title">📡 Sources suivies</h2>
+    <div class="section-divider"></div>
+    <p style="font-size:0.85rem;color:var(--muted);margin:0.5rem 0 1.2rem;">Médias et publications spécialisés consultés régulièrement pour la veille.</p>
+
+    <div class="method-steps">
+
+      <a href="https://dcmag.fr" target="_blank" rel="noopener" class="method-step" style="text-decoration:none;cursor:pointer;">
+        <div class="method-step-icon">🖥️</div>
+        <h4>DC Mag</h4>
+        <p>Média de référence de l'écosystème Datacenter. Tendances infrastructure, Edge Computing et Cloud.</p>
+        <div class="tool-date">Depuis sept. 2025</div>
+      </a>
+
+      <a href="https://www.tenexa.com" target="_blank" rel="noopener" class="method-step" style="text-decoration:none;cursor:pointer;">
+        <div class="method-step-icon">☁️</div>
+        <h4>Tenexa Infrastructure</h4>
+        <p>Publication d'experts en infrastructure cloud et stockage. Analyses techniques pour les DSI et développeurs.</p>
+        <div class="tool-date">Depuis oct. 2025</div>
+      </a>
+
+      <div class="method-step">
+        <div class="method-step-icon">📝</div>
+        <h4>Blogs DevOps &amp; Cloud</h4>
+        <p>Publications d'ingénierie Cloud, retours d'expérience et benchmarks sur les environnements de déploiement.</p>
+        <div class="tool-date">Depuis nov. 2025</div>
+      </div>
+
+    </div>
+
+    <!-- Mots-clés stratégiques -->
+    <div style="margin-top:1.5rem;">
+      <p style="font-size:0.85rem;font-weight:700;color:var(--text);margin-bottom:0.5rem;">Mots-clés surveillés :</p>
+      <div class="kw-wrap">
+        <span class="kw">Edge Computing</span>
+        <span class="kw">Datacenter</span>
+        <span class="kw">Stockage Immuable</span>
+        <span class="kw">Déploiement applicatif</span>
+        <span class="kw">Résilience Cyber</span>
+        <span class="kw">SSH / FTP sécurisé</span>
+        <span class="kw">Cloud Infrastructure</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Actualités -->
+  <div class="animate delay-1" style="margin-bottom:2.5rem;">
+    <h2 class="section-title">📰 Actualités analysées</h2>
+    <div class="section-divider"></div>
+    <p style="font-size:0.85rem;color:var(--muted);margin:0.5rem 0 0;">Classées par axe de bornage — ordre chronologique décroissant</p>
+
+    <div class="news-list">
+
+      <!-- News Axe 1 — DCmag avril 2026 -->
+      <a href="docs/news-dcmag-avr2026.pdf" target="_blank" rel="noopener" class="news-item">
+        <div class="news-axe-stripe"></div>
+        <div class="news-body">
+          <div class="news-meta">
+            <span class="news-axe-tag">Axe 1 — Hébergement &amp; Déploiement</span>
+            <span class="news-date-txt">23 avril 2026</span>
+            <span class="news-src">DC Mag — Yves Grandmontagne</span>
+          </div>
+          <div class="news-item-title">La loi de simplification économique consacre l'article 15 dédié aux datacenters, adopté !</div>
+          <p class="news-summary">
+            La France adopte définitivement en avril 2026 la loi de simplification économique dont l'<strong>article 15</strong> permet de classer
+            certains datacenters en tant que <strong>Projets d'Intérêt National Majeur (PINM)</strong>. Ce statut simplifie et accélère drastiquement
+            les procédures administratives (permis, conformité environnementale, raccordement électrique), qui prenaient auparavant 5 à 7 ans.
+            Le gouvernement a identifié 63 sites favorables sur le territoire. L'enjeu : renforcer la <strong>souveraineté numérique française</strong>
+            et permettre un déploiement rapide des infrastructures d'hébergement face à l'Allemagne et aux Pays-Bas. Condition sine qua non :
+            les opérateurs relevant d'un pays hors UE sans protection équivalente des données personnelles sont exclus du dispositif.
+          </p>
+          <span class="news-link-label">📄 Ouvrir l'article (PDF local) →</span>
+        </div>
+      </a>
+
+      <!-- News Axe 2 — GoodTech.info avril 2026 -->
+      <a href="docs/news-goodtech-avr2026.pdf" target="_blank" rel="noopener" class="news-item">
+        <div class="news-axe-stripe axe-2"></div>
+        <div class="news-body">
+          <div class="news-meta">
+            <span class="news-axe-tag axe-2">Axe 2 — Sauvegarde &amp; Intégrité</span>
+            <span class="news-date-txt">17 avril 2026</span>
+            <span class="news-src">GoodTech.info — d'après Veeam Data Trust &amp; Resilience Report 2026</span>
+          </div>
+          <div class="news-item-title">Cyber-résilience 2026 : le grand décalage entre certitude et réalité</div>
+          <p class="news-summary">
+            Le rapport Veeam 2026 (900+ dirigeants IT interrogés) révèle un écart alarmant : <strong>90 % des RSSI</strong> se disent confiants
+            dans leur capacité de récupération après ransomware, mais <strong>seulement 28 %</strong> des organisations victimes ont réussi à
+            récupérer l'intégralité de leurs données. En moyenne, seuls 72 % des données sont restaurées après une attaque. L'article souligne
+            que les organisations ayant augmenté leur budget cybersécurité atteignent un taux de récupération complète de <strong>40 %</strong>
+            contre seulement 16 % pour les autres — validant directement l'investissement dans le <strong>stockage immuable</strong> et les
+            sauvegardes automatisées et isolées.
+          </p>
+          <span class="news-link-label">📄 Ouvrir l'article (PDF local) →</span>
+        </div>
+      </a>
+
+      <!-- News 1 — Axe 2 (Stockage / plus récente) -->
+      <a href="docs/news-tenexa-dec2025.pdf" target="_blank" rel="noopener" class="news-item">
+        <div class="news-axe-stripe axe-2"></div>
+        <div class="news-body">
+          <div class="news-meta">
+            <span class="news-axe-tag axe-2">Axe 2 — Sauvegarde &amp; Intégrité</span>
+            <span class="news-date-txt">Décembre 2025</span>
+            <span class="news-src">Tenexa Infrastructure</span>
+          </div>
+          <div class="news-item-title">Stockage de données : ce que chaque DSI doit anticiper en 2026</div>
+          <p class="news-summary">
+            Fin 2025, la priorité absolue des infrastructures de stockage devient la résilience face aux cyberattaques et aux ransomwares.
+            L'article met en avant l'adoption massive du <strong>stockage immuable</strong> : une technologie garantissant que les sauvegardes
+            ne puissent être ni chiffrées, ni altérées, ni supprimées en cas de piratage. Pour le développeur, cela signifie que la stratégie
+            de sauvegarde des bases de données doit intégrer l'immuabilité dès la conception, pour assurer la continuité d'activité de toute application.
+          </p>
+          <span class="news-link-label">📄 Ouvrir l'article (PDF local) →</span>
+        </div>
+      </a>
+
+      <!-- News 2 — Axe 1 (Datacenter / janvier 2025) -->
+      <a href="docs/news-dcmag-jan2025.pdf" target="_blank" rel="noopener" class="news-item">
+        <div class="news-axe-stripe"></div>
+        <div class="news-body">
+          <div class="news-meta">
+            <span class="news-axe-tag">Axe 1 — Hébergement &amp; Déploiement</span>
+            <span class="news-date-txt">Janvier 2025</span>
+            <span class="news-src">DC Mag — Sebastien Grandmontagne</span>
+          </div>
+          <div class="news-item-title">L'industrie des Datacenters en 2025 : les grandes tendances et innovations à venir</div>
+          <p class="news-summary">
+            L'article détaille comment l'évolution vers le <strong>Edge Computing</strong> transforme radicalement la manière dont les applications
+            sont hébergées. La centralisation absolue n'est plus la norme : le déploiement doit désormais être pensé de manière distribuée,
+            en rapprochant physiquement le code exécutable de l'utilisateur final pour réduire la latence. L'article aborde également
+            l'optimisation pilotée par l'IA dans la gestion des Datacenters, et l'impératif de durabilité (couplage sectoriel, énergies renouvelables).
+          </p>
+          <span class="news-link-label">📄 Ouvrir l'article (PDF local) →</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- Mise en application -->
+  <div class="animate delay-1" style="margin-bottom:2.5rem;">
+    <h2 class="section-title">💡 Mise en application envisagée</h2>
+    <div class="section-divider"></div>
+    <div style="margin-top:1.5rem;">
+      <div class="appli-card">
+        <div class="appli-icon">🚀</div>
+        <div class="appli-body" style="flex:1;">
+          <h3>Déploiement d'une application To-Do List sur serveur distant</h3>
+          <p>
+            Suite aux apprentissages de cette veille, le projet consiste à mettre en ligne une application de gestion de tâches
+            (To-Do List) sur un serveur de production réel. Le processus implique le transfert du code depuis l'environnement local
+            vers le serveur distant via des protocoles sécurisés, la configuration de l'environnement d'hébergement,
+            et la vérification du bon fonctionnement public de l'application.
+          </p>
+          <div class="tech-chips">
+            <span class="tech-chip">🔐 FTP sécurisé (FTPS)</span>
+            <span class="tech-chip">🖥️ SSH</span>
+            <span class="tech-chip">🌐 Serveur Web Apache/Nginx</span>
+            <span class="tech-chip">🗃️ MySQL distant</span>
+            <span class="tech-chip">⚙️ Configuration hébergement</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<footer>
+  <p>© 2026 Yamine Amara — Portfolio BTS SIO SLAM &nbsp;|&nbsp; <a href="mailto:yamineamara@icloud.com">yamineamara@icloud.com</a></p>
+</footer>
+
+<button id="theme-toggle" aria-label="Changer de thème">🌙</button>
+<script src="theme.js"></script>
+</body>
+</html>
